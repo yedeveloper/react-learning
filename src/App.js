@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Home from './home'
+import Login from './login'
+import MiddleAuth from './middleauth'
+import About from './about'
 
 function App() {
+
+  const isAuth = localStorage.getItem('isAuth');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Bienvenido!</h1><br />
+      <Routes>
+          <Route path="/" element={
+            <main style={{ padding: "1rem" }}>
+            <p>BIENVENIDO A NUESTRO PROYECTO</p>
+          </main>
+          } />
+           <Route path="/inicio-sesion" element={<Login />} />
+           <Route path="/home" element={
+             <MiddleAuth>
+               <Home />
+             </MiddleAuth>
+           }></Route>
+           <Route path="/about" element={
+             <MiddleAuth>
+               <About />
+             </MiddleAuth>
+           } />
+           <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>404 NOT FOUND</p>
+                </main>
+              }
+            />
+      </Routes>
     </div>
   );
 }
